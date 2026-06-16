@@ -10,6 +10,9 @@ function Booking() {
         <h1 className="text-5xl font-bold text-center text-emerald-700 mb-10">
           Booking Inquiry
         </h1>
+        <p className="text-center text-gray-500 mb-4">
+Book directly and save OTA commission fees.
+</p>
 
         <form className="max-w-2xl mx-auto bg-white p-8 rounded-3xl shadow-xl">
 
