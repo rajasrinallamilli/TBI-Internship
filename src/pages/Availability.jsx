@@ -1,7 +1,11 @@
+import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { Loader } from "../components/ui";
 
 function Availability() {
+  const [loading, setLoading] = useState(true);
+
   const availableDates = [
     "20 June - 25 June",
     "1 July - 10 July",
@@ -9,16 +13,28 @@ function Availability() {
     "1 August - 15 August",
   ];
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return <Loader />;
+  }
+
   return (
     <>
       <Navbar />
 
-      <main className="min-h-screen bg-sky-50 p-10">
+      <main className="min-h-screen bg-sky-50 dark:bg-gray-900 dark:text-white p-10">
         <h1 className="text-5xl font-bold text-emerald-700 mb-8">
           Availability Calendar
         </h1>
 
-        <div className="bg-white rounded-2xl shadow-lg p-8">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8">
           <h2 className="text-2xl font-semibold mb-4">
             Available Dates
           </h2>

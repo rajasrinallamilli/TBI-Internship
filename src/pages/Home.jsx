@@ -10,20 +10,20 @@ function Home() {
 
       <Hero />
 
-      <section className="py-12 px-6 bg-slate-50">
-        <h2 className="text-4xl font-bold text-center text-emerald-700 mb-6">
+      <section className="py-12 px-6 bg-slate-50 dark:bg-black">
+        <h2 className="text-4xl font-bold text-center text-emerald-700 dark:text-yellow-300 mb-6">
           About Our Homestay
         </h2>
 
-        <p className="max-w-4xl mx-auto text-center text-gray-600">
+       <p className="max-w-4xl mx-auto text-center text-gray-600 dark:text-gray-300">
           Nestled in nature, Trishul Eco Homestays offers a peaceful getaway
           with breathtaking mountain views, eco-friendly accommodations, and
           authentic local experiences.
         </p>
       </section>
 
-      <section className="py-12 px-6 bg-gradient-to-b from-white to-emerald-50">
-        <h2 className="text-4xl font-bold text-center text-emerald-700 mb-10">
+      <section className="py-12 px-6 bg-gradient-to-b from-white to-emerald-50 dark:from-gray-900 dark:to-black">
+       <h2 className="text-4xl font-bold text-center text-emerald-700 dark:text-yellow-300 mb-10">
           Available Room Types
         </h2>
 

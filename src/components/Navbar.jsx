@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-
+import ThemeToggle from "./ThemeToggle";
 function Navbar() {
   return (
-    <nav className="bg-gradient-to-r from-emerald-600 to-teal-500 text-white px-6 py-4 flex flex-col md:flex-row justify-between items-center shadow-lg">
+    <nav className="bg-gradient-to-r from-emerald-600 to-teal-500 dark:from-black dark:to-gray-900 text-white px-6 py-4 flex flex-col md:flex-row justify-between items-center shadow-lg">
 
       <h1 className="text-2xl font-bold">
         🌿 Trishul Eco Homestays|Direct Booking
@@ -15,9 +15,10 @@ function Navbar() {
         <Link to="/booking">Book Now</Link>
       </div>
 
-      <div className="hidden md:block text-xl">
-        👤
-      </div>
+      <div className="flex items-center gap-4">
+  <ThemeToggle />
+  <span className="text-xl">👤</span>
+</div>
 
     </nav>
   );

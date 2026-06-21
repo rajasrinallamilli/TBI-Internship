@@ -1,7 +1,7 @@
 function Footer() {
   return (
-    <footer className="bg-emerald-800 text-white py-8 text-center">
-
+    
+<footer className="bg-emerald-700 dark:bg-black text-white">
       <h2 className="text-xl font-bold mb-3">
         🌿 Trishul Eco Homestays
       </h2>

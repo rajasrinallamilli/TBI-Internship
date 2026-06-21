@@ -7,7 +7,7 @@ function About() {
     <>
       <Navbar />
 
-      <main className="min-h-screen bg-slate-50 p-10">
+      <main className="min-h-screen bg-slate-50 dark:bg-gray-900 dark:text-white p-10">
         <h1 className="text-5xl font-bold text-emerald-700 mb-6">
           About Trishul Eco Homestays
         </h1>
