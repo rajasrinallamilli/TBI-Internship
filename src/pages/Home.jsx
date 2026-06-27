@@ -2,10 +2,21 @@ import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import Card from "../components/Card";
 import Footer from "../components/Footer";
-
+import { useEffect, useState } from "react";
 function Home() {
+  const [rooms, setRooms] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:5000/api/homestays")
+      .then((response) => response.json())
+      .then((data) => {
+        setRooms(data);
+      })
+      .catch((error) => console.log(error));
+  }, []);
   return (
     <>
+      
+     
       <Navbar />
 
       <Hero />
@@ -28,24 +39,15 @@ function Home() {
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <Card
-            title="Mountain View Cottage"
-            description="Private cottage overlooking scenic hills."
-            image="https://images.unsplash.com/photo-1506744038136-46273834b3fb"
-          />
-
-          <Card
-            title="Forest Retreat"
-            description="Stay surrounded by greenery and fresh air."
-            image="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee"
-          />
-
-          <Card
-            title="Family Eco Villa"
-            description="Spacious villa ideal for families."
-            image="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267"
-          />
-        </div>
+  {rooms.map((room) => (
+    <Card
+      key={room.id}
+      title={room.title}
+      description={room.description}
+      image={room.image}
+    />
+  ))}
+</div>
       </section>
 
       <Footer />
