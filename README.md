@@ -10,3 +10,9 @@ A direct booking engine MVP built using React, Vite, Tailwind CSS and React Rout
 - Availability Page
 - Booking Inquiry Form
 - Mobile Friendly Design
+
+## Backend Setup
+
+cd backend
+npm install
+npm run dev
