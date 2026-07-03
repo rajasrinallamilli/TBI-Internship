@@ -1,5 +1,5 @@
 import { Button } from "./ui";
-function Card({ title, description, image }) {
+function Card({ title, description, image ,location, price}) {
   return (
     <div className="bg-white dark:bg-gray-800 dark:text-white rounded-3xl overflow-hidden shadow-xl hover:scale-105 transition">
       <img
@@ -17,6 +17,13 @@ function Card({ title, description, image }) {
         <p className="text-gray-600 dark:text-gray-300">
           {description}
         </p>
+        <p className="mt-2 text-gray-600 dark:text-gray-300">
+  📍 {location}
+</p>
+
+<p className="font-bold text-emerald-700 mt-1">
+  ₹ {price} / Night
+</p>
 
       </div>
       <div className="mt-5">

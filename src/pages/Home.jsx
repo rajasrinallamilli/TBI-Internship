@@ -3,16 +3,22 @@ import Hero from "../components/Hero";
 import Card from "../components/Card";
 import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
+import axios from "axios";
 function Home() {
-  const [rooms, setRooms] = useState([]);
-  useEffect(() => {
-    fetch("http://localhost:5000/api/homestays")
-      .then((response) => response.json())
-      .then((data) => {
-        setRooms(data);
-      })
-      .catch((error) => console.log(error));
-  }, []);
+  const [homestays, setHomestays] = useState([]);
+
+useEffect(() => {
+  axios
+    .get("http://localhost:5000/api/homestays")
+    .then((response) => {
+      setHomestays(response.data);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}, []);
+
+  
   return (
     <>
       
@@ -39,12 +45,14 @@ function Home() {
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-  {rooms.map((room) => (
+  {homestays.map((home) => (
     <Card
-      key={room.id}
-      title={room.title}
-      description={room.description}
-      image={room.image}
+      key={home._id}
+      title={home.title}
+      description={home.description}
+      image={home.image}
+      location={home.location}
+  price={home.price}
     />
   ))}
 </div>
