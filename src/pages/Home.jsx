@@ -17,7 +17,7 @@ useEffect(() => {
       console.error(error);
     });
 }, []);
-
+console.log(homestays);
   
   return (
     <>
