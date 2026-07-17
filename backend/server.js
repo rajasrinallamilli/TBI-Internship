@@ -4,6 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const passport = require("passport");
 require("dotenv").config();
+const aiRoutes = require("./routes/aiRoutes");
 require("./config/passport");
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
@@ -20,7 +21,7 @@ app.use(passport.initialize());
 
 app.use("/api/homestays", homestayRoutes);
 app.use("/api/auth", authRoutes);
-
+app.use("/api/ai", aiRoutes);
 app.get("/api/search", async (req, res) => {
   try {
     const location = req.query.location;

@@ -13,6 +13,7 @@ import About from "./pages/About";
 import Availability from "./pages/Availability";
 import Booking from "./pages/Booking";
 import ComponentDemo from "./pages/ComponentDemo";
+import AITripPlanner from "./pages/AITripPlanner";
 
 // Week 6 Authentication Pages
 import Login from "./pages/Login";
@@ -63,6 +64,7 @@ ReactDOM.createRoot(
         path="/register"
         element={<Register />}
       />
+<Route path="/ai-trip-planner" element={<AITripPlanner />} />
 
       <Route
         path="/components"
