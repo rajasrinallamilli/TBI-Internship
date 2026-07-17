@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const AITripPlanner = () => {
   const [destination, setDestination] = useState("");
@@ -10,34 +11,49 @@ const AITripPlanner = () => {
   const [tripPlan, setTripPlan] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const generateTrip = async () => {
-    if (!destination || !days || !people || !interest) {
-      alert("Please fill all fields");
-      return;
-    }
+ const generateTrip = async () => {
 
-    try {
-      setLoading(true);
-      setTripPlan("");
+  if (!destination || !days || !people || !interest) {
 
-      const res = await axios.post(
-        "http://localhost:5000/api/ai/tripplanner",
-        {
-          destination,
-          days,
-          people,
-          interest,
-        }
-      );
+    toast.error("Please fill all the fields.");
 
-      setTripPlan(res.data.tripPlan);
-    } catch (err) {
-      console.error(err);
-      alert("Failed to generate trip plan");
-    } finally {
-      setLoading(false);
-    }
-  };
+    return;
+  }
+
+  try {
+
+    setLoading(true);
+    setTripPlan("");
+
+    const res = await axios.post(
+      "http://localhost:5000/api/ai/tripplanner",
+      {
+        destination,
+        days,
+        people,
+        interest,
+      }
+    );
+
+    setTripPlan(res.data.tripPlan);
+
+    toast.success("Trip plan generated successfully!");
+
+  } catch (err) {
+
+    console.error(err);
+
+    toast.error(
+      "Unable to generate trip plan. Please try again."
+    );
+
+  } finally {
+
+    setLoading(false);
+
+  }
+
+};
 return (
   <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-emerald-100 py-12 px-6">
 

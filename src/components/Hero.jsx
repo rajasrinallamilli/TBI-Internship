@@ -1,5 +1,5 @@
 import { Button } from "./ui";
-
+import { Link } from "react-router-dom";
 function Hero() {
   return (
     
@@ -11,12 +11,21 @@ function Hero() {
       <p className="text-xl mb-8">
         Direct bookings. Zero commission. Pure mountain experience.
       </p>
+     <div className="flex gap-4 justify-center mt-6">
 
-      
+  <Link to="/booking">
+    <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg">
+      Book Now
+    </button>
+  </Link>
 
-<Button variant="primary" size="lg">
-  Book Your Stay
-</Button>
+  <Link to="/ai-trip-planner">
+    <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg">
+      🤖 AI Trip Planner
+    </button>
+  </Link>
+
+</div>
 
     </section>
   );
