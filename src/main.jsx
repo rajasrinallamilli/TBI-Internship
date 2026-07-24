@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 
 import { Toaster } from "react-hot-toast";
+import Dashboard from "./pages/Dashboard";
 
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -14,7 +15,7 @@ import Availability from "./pages/Availability";
 import Booking from "./pages/Booking";
 import ComponentDemo from "./pages/ComponentDemo";
 import AITripPlanner from "./pages/AITripPlanner";
-
+import ErrorBoundary from "./components/ErrorBoundary";
 // Week 6 Authentication Pages
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -29,12 +30,21 @@ import "./index.css";
 ReactDOM.createRoot(
   document.getElementById("root")
 ).render(
+  <ErrorBoundary>
   <BrowserRouter>
 
     {/* Toast notifications */}
     <Toaster position="top-right" />
 
     <Routes>
+      <Route
+    path="/dashboard"
+    element={
+        <ProtectedRoute>
+            <Dashboard />
+        </ProtectedRoute>
+    }
+/>
 
       {/* ========================= */}
       {/* PUBLIC ROUTES */}
@@ -98,8 +108,11 @@ ReactDOM.createRoot(
           </ProtectedRoute>
         }
       />
+     
+
 
     </Routes>
 
   </BrowserRouter>
+  </ErrorBoundary>
 );
