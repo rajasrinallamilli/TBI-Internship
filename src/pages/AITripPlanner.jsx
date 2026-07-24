@@ -107,12 +107,27 @@ return (
 
         </div>
 
-        <button
-          onClick={generateTrip}
-          className="mt-8 w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-4 rounded-xl transition duration-300"
-        >
-          ✨ Generate My AI Trip
-        </button>
+       <button
+  onClick={generateTrip}
+  disabled={loading}
+  className="mt-8 w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-4 rounded-xl transition duration-300 disabled:bg-gray-400 disabled:cursor-not-allowed"
+>
+  {loading ? "Generating..." : "✨ Generate My AI Trip"}
+</button>
+<button
+  onClick={() => {
+
+    setDestination("");
+    setDays("");
+    setPeople("");
+    setInterest("");
+    setTripPlan("");
+
+  }}
+  className="mt-4 w-full bg-gray-500 hover:bg-gray-600 text-white font-semibold py-4 rounded-xl"
+>
+  Clear
+</button>
 
       </div>
 
@@ -129,6 +144,28 @@ return (
         </div>
 
       )}
+      {
+!loading && !tripPlan && (
+
+<div className="mt-10 bg-white rounded-3xl shadow-lg p-8 text-center">
+
+<h2 className="text-2xl font-bold text-green-700">
+
+🌿 Ready to Plan?
+
+</h2>
+
+<p className="mt-3 text-gray-600">
+
+Enter your trip details above and click
+Generate My AI Trip.
+
+</p>
+
+</div>
+
+)
+}
 
       {tripPlan && (
 
