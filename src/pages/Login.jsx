@@ -64,7 +64,7 @@ function Login() {
 
       // Save JWT token in localStorage
       localStorage.setItem("token", data.token);
-
+navigate("/dashboard");
       // Save logged-in user details
       localStorage.setItem(
         "user",
