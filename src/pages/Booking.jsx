@@ -2,7 +2,7 @@ import { useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import toast from "react-hot-toast";
-
+import axios from "axios";
 import {
   Button,
   Input,
@@ -12,13 +12,84 @@ import {
 function Booking() {
   const [open, setOpen] = useState(false);
 
-  const submitHandler = (e) => {
-    e.preventDefault();
+const [loading, setLoading] = useState(false);
 
-    toast.success("Booking Confirmed!");
+const [booking, setBooking] = useState({
+  checkIn: "",
+  checkOut: "",
+  guests: "",
+  room: "Mountain View Cottage",
+  name: "",
+  phone: "",
+  email: "",
+});
+const handleChange = (e) => {
+
+  setBooking({
+
+    ...booking,
+
+    [e.target.name]: e.target.value,
+
+  });
+
+};
+
+  const submitHandler = async (e) => {
+
+  e.preventDefault();
+
+  if (
+    !booking.checkIn ||
+    !booking.checkOut ||
+    !booking.guests ||
+    !booking.name ||
+    !booking.phone ||
+    !booking.email
+  ) {
+
+    toast.error("Please fill all fields.");
+
+    return;
+
+  }
+
+  setLoading(true);
+
+  try {
+
+    const res = await axios.post(
+      "http://localhost:5000/api/bookings",
+      booking
+    );
+
+    toast.success(res.data.message);
 
     setOpen(true);
-  };
+
+    setBooking({
+      checkIn: "",
+      checkOut: "",
+      guests: "",
+      room: "Mountain View Cottage",
+      name: "",
+      phone: "",
+      email: "",
+    });
+
+  } catch (error) {
+
+    toast.error(
+      error.response?.data?.message || "Booking Failed"
+    );
+
+  } finally {
+
+    setLoading(false);
+
+  }
+
+};
 
   return (
     <>
@@ -39,60 +110,90 @@ function Booking() {
           <div className="mb-4">
             <label className="block mb-2">Check-In Date</label>
             <input
-              type="date"
-              className="w-full border rounded-lg p-3"
-            />
+type="date"
+name="checkIn"
+value={booking.checkIn}
+onChange={handleChange}
+className="w-full border rounded-lg p-3"
+/>
           </div>
 
           <div className="mb-4">
             <label className="block mb-2">Check-Out Date</label>
             <input
-              type="date"
-              className="w-full border rounded-lg p-3"
-            />
+type="date"
+name="checkOut"
+value={booking.checkOut}
+onChange={handleChange}
+className="w-full border rounded-lg p-3"
+/>
           </div>
 
           <div className="mb-4">
             <label className="block mb-2">Guests</label>
-            <input
-              type="number"
-              className="w-full border rounded-lg p-3"
-            />
+           <input
+type="number"
+name="guests"
+value={booking.guests}
+onChange={handleChange}
+className="w-full border rounded-lg p-3"
+/>
           </div>
 
           <div className="mb-4">
             <label className="block mb-2">Room Preference</label>
-            <select className="w-full border rounded-lg p-3">
-              <option>Mountain View Cottage</option>
-              <option>Forest Retreat</option>
-              <option>Family Eco Villa</option>
-            </select>
+           <select
+name="room"
+value={booking.room}
+onChange={handleChange}
+className="w-full border rounded-lg p-3"
+></select>
           </div>
 
-          <Input
-            label="Full Name"
-            placeholder="Enter your name"
-          />
+       <Input
+label="Full Name"
+name="name"
+value={booking.name}
+onChange={handleChange}
+placeholder="Enter your name"
+/>
 
           <Input
-            label="Phone Number"
-            type="tel"
-            placeholder="Enter phone number"
-          />
+label="Phone Number"
+name="phone"
+value={booking.phone}
+onChange={handleChange}
+type="tel"
+placeholder="Enter phone number"
+/>
 
-          <Input
-            label="Email"
-            type="email"
-            placeholder="Enter email"
-          />
+        <Input
+label="Email"
+name="email"
+value={booking.email}
+onChange={handleChange}
+type="email"
+placeholder="Enter email"
+/>  
 
           <div className="mt-6">
             <Button
-              variant="primary"
-              size="lg"
-            >
-              Send Booking Inquiry
-            </Button>
+
+variant="primary"
+
+size="lg"
+
+disabled={loading}
+
+>
+
+{loading
+
+? "Submitting..."
+
+: "Send Booking Inquiry"}
+
+</Button>
           </div>
         </form>
 
@@ -105,7 +206,9 @@ function Booking() {
             Your booking inquiry has been submitted successfully.
           </p>
         </Modal>
+        
       </main>
+
 
       <Footer />
     </>
