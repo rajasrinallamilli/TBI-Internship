@@ -22,7 +22,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      process.env.FRONTEND_URL || "https://trishul-ecohomestay.vercel.app",
+      process.env.FRONTEND_URL || "https://tbitrishulecohomestay.vercel.app",
     ],
     credentials: true,
   })
