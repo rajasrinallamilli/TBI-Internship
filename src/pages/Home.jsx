@@ -11,17 +11,25 @@ function Home() {
   const [homestays, setHomestays] = useState([]);
 
   useEffect(() => {
+    if (!API) {
+      console.error("VITE_API_URL is not set. Check your Vercel environment variables.");
+      return;
+    }
     axios
       .get(`${API}/api/homestays`)
       .then((response) => {
-        setHomestays(response.data);
+        if (Array.isArray(response.data)) {
+          setHomestays(response.data);
+        } else {
+          console.error("Expected an array from /api/homestays, got:", response.data);
+          setHomestays([]);
+        }
       })
       .catch((error) => {
-        console.error(error);
+        console.error("Failed to fetch homestays:", error);
+        setHomestays([]);
       });
   }, []);
-
-  console.log(homestays);
 
   return (
     <>

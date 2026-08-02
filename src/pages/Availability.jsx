@@ -16,11 +16,22 @@ function Availability() {
   }, []);
 
   const fetchHomestays = async () => {
+    if (!API) {
+      console.error("VITE_API_URL is not set. Check your Vercel environment variables.");
+      setLoading(false);
+      return;
+    }
     try {
       const res = await axios.get(`${API}/api/homestays`);
-      setHomestays(res.data);
+      if (Array.isArray(res.data)) {
+        setHomestays(res.data);
+      } else {
+        console.error("Expected an array from /api/homestays, got:", res.data);
+        setHomestays([]);
+      }
     } catch (err) {
-      console.error(err);
+      console.error("Failed to fetch homestays:", err);
+      setHomestays([]);
     } finally {
       setLoading(false);
     }
