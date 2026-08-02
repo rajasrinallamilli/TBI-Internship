@@ -14,6 +14,9 @@ const Homestay = require("./models/Homestay");
 
 
 const app = express();
+const bookingRoutes = require("./routes/bookingRoutes");
+
+app.use("/api/bookings", bookingRoutes);
 
 app.use(cors());
 app.use(express.json());
