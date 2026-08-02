@@ -46,14 +46,15 @@ console.log(homestays);
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
   {homestays.map((home) => (
-    <Card
-      key={home._id}
-      title={home.title}
-      description={home.description}
-      image={home.image}
-      location={home.location}
+ <Card
+  key={home._id}
+  id={home._id}
+  title={home.title}
+  description={home.description}
+  image={home.image}
+  location={home.location}
   price={home.price}
-    />
+/>
   ))}
 </div>
       </section>

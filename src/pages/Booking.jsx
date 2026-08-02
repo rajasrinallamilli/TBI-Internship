@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import toast from "react-hot-toast";
@@ -9,20 +10,48 @@ import {
   Modal,
 } from "../components/ui";
 
-function Booking() {
-  const [open, setOpen] = useState(false);
+const API = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
+function Booking() {
+  const { id } = useParams();
+
+const [open, setOpen] = useState(false);
 const [loading, setLoading] = useState(false);
+const [homestay, setHomestay] = useState(null);
 
 const [booking, setBooking] = useState({
   checkIn: "",
   checkOut: "",
   guests: "",
-  room: "Mountain View Cottage",
+  room: "",
   name: "",
   phone: "",
   email: "",
 });
+useEffect(() => {
+  fetchHomestay();
+}, []);
+
+const fetchHomestay = async () => {
+  try {
+    const res = await axios.get(`${API}/api/homestays/${id}`);
+
+    setHomestay(res.data);
+
+    setBooking((prev) => ({
+      ...prev,
+      room: res.data.title,
+    }));
+
+  } catch (error) {
+  console.error(error);
+  console.log(error.response);
+
+  toast.error(
+    error.response?.data?.message || "Unable to load homestay."
+  );
+}
+};
 const handleChange = (e) => {
 
   setBooking({
@@ -59,7 +88,7 @@ const handleChange = (e) => {
   try {
 
     const res = await axios.post(
-      "http://localhost:5000/api/bookings",
+      `${API}/api/bookings`,
       booking
     );
 
@@ -103,7 +132,33 @@ const handleChange = (e) => {
         <p className="text-center text-gray-500 mb-4">
           Book directly and save OTA commission fees.
         </p>
+{homestay && (
+  <div className="max-w-2xl mx-auto bg-white dark:bg-gray-800 rounded-3xl shadow-xl overflow-hidden mb-8">
 
+    <img
+      src={homestay.image}
+      alt={homestay.title}
+      className="w-full h-64 object-cover"
+    />
+
+    <div className="p-6">
+
+      <h2 className="text-3xl font-bold">
+        {homestay.title}
+      </h2>
+
+      <p className="text-gray-500 mt-2">
+        📍 {homestay.location}
+      </p>
+
+      <p className="text-emerald-700 font-bold text-2xl mt-2">
+        ₹{homestay.price} / Night
+      </p>
+
+    </div>
+
+  </div>
+)}
         <form
           onSubmit={submitHandler}
           className="max-w-2xl mx-auto bg-white dark:bg-gray-800 dark:text-white p-8 rounded-3xl shadow-xl">
@@ -139,16 +194,19 @@ onChange={handleChange}
 className="w-full border rounded-lg p-3"
 />
           </div>
+<div className="mb-4">
+  <label className="block mb-2">
+    Selected Homestay
+  </label>
 
-          <div className="mb-4">
-            <label className="block mb-2">Room Preference</label>
-           <select
-name="room"
-value={booking.room}
-onChange={handleChange}
-className="w-full border rounded-lg p-3"
-></select>
-          </div>
+  <input
+    type="text"
+    value={booking.room}
+    readOnly
+    className="w-full border rounded-lg p-3 bg-gray-100 dark:bg-gray-700"
+  />
+</div>
+        
 
        <Input
 label="Full Name"

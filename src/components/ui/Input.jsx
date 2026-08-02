@@ -1,20 +1,23 @@
-
 function Input({
   label,
   placeholder,
   type = "text",
+  name,
   value,
   onChange,
   error,
 }) {
   return (
     <div className="mb-4">
-      <label className="block mb-1">{label}</label>
+      <label className="block mb-1 font-medium">
+        {label}
+      </label>
 
       <input
-        className="border rounded w-full p-2"
+        className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-emerald-500"
         placeholder={placeholder}
         type={type}
+        name={name}          // ✅ Added
         value={value}
         onChange={onChange}
       />

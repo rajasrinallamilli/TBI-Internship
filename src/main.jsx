@@ -91,7 +91,7 @@ ReactDOM.createRoot(
 
       {/* Protected Route 1 */}
       <Route
-        path="/booking"
+        path="/booking/:id"
         element={
           <ProtectedRoute>
             <Booking />
