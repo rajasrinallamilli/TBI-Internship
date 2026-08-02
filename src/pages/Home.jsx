@@ -9,7 +9,7 @@ function Home() {
 
 useEffect(() => {
   axios
-    .get("http://localhost:5000/api/homestays")
+    .get("const API = import.meta.env.VITE_API_URL;/api/homestays")
     .then((response) => {
       setHomestays(response.data);
     })

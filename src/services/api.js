@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Centralized Axios instance for communicating with the backend
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || "http://localhost:5000/api",
+  baseURL: import.meta.env.VITE_API_URL || "const API = import.meta.env.VITE_API_URL;/api",
 });
 
 // Request interceptor to automatically attach the JWT bearer token to headers

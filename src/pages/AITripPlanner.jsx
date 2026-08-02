@@ -26,7 +26,7 @@ const AITripPlanner = () => {
     setTripPlan("");
 
     const res = await axios.post(
-      "http://localhost:5000/api/ai/tripplanner",
+      "const API = import.meta.env.VITE_API_URL;/api/ai/tripplanner",
       {
         destination,
         days,

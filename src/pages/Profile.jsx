@@ -23,7 +23,7 @@ function Profile() {
 
         // Send token to protected backend API
         const response = await fetch(
-          "http://localhost:5000/api/auth/profile",
+          "const API = import.meta.env.VITE_API_URL;/api/auth/profile",
           {
             method: "GET",
 
