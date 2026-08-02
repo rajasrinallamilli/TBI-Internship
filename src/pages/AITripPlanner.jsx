@@ -2,6 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 
+const API = import.meta.env.VITE_API_URL;
+
 const AITripPlanner = () => {
   const [destination, setDestination] = useState("");
   const [days, setDays] = useState("");
@@ -26,7 +28,7 @@ const AITripPlanner = () => {
     setTripPlan("");
 
     const res = await axios.post(
-      "const API = import.meta.env.VITE_API_URL;/api/ai/tripplanner",
+      `${API}/api/ai/tripplanner`,
       {
         destination,
         days,

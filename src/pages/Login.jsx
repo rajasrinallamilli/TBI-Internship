@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+const API = import.meta.env.VITE_API_URL;
+
 function Login() {
   const navigate = useNavigate();
 
@@ -36,7 +38,7 @@ function Login() {
       setLoading(true);
 
       const response = await fetch(
-        "const API = import.meta.env.VITE_API_URL;/api/auth/login",
+        `${API}/api/auth/login`,
         {
           method: "POST",
 
@@ -64,7 +66,7 @@ function Login() {
 
       // Save JWT token in localStorage
       localStorage.setItem("token", data.token);
-navigate("/dashboard");
+
       // Save logged-in user details
       localStorage.setItem(
         "user",
@@ -86,7 +88,7 @@ navigate("/dashboard");
   // Open Google OAuth login
 const handleGoogleLogin = () => {
   window.location.href =
-    "const API = import.meta.env.VITE_API_URL;/api/auth/google";
+    `${API}/api/auth/google`;
 };
 
   return (

@@ -19,7 +19,7 @@ function Dashboard() {
                 const token = localStorage.getItem("token");
 
                 const res = await axios.get(
-                    "const API = import.meta.env.VITE_API_URL;/api/auth/profile",
+                    `${import.meta.env.VITE_API_URL}/api/auth/profile`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,

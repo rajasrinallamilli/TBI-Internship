@@ -247,7 +247,7 @@ router.get(
 
     // Google login fails
     failureRedirect:
-      "http://localhost:5173/login?error=google-login-failed",
+      `${process.env.FRONTEND_URL || "https://trishul-ecohomestay.vercel.app"}/login?error=google-login-failed`,
   }),
 
   async (req, res) => {
@@ -268,7 +268,7 @@ router.get(
       // Redirect user to frontend
       // with JWT token
       res.redirect(
-        `http://localhost:5173/oauth-success?token=${token}`
+        `${process.env.FRONTEND_URL || "https://trishul-ecohomestay.vercel.app"}/oauth-success?token=${token}`
       );
     } catch (error) {
       console.error(
@@ -277,7 +277,7 @@ router.get(
       );
 
       res.redirect(
-        "http://localhost:5173/login?error=google-login-failed"
+        `${process.env.FRONTEND_URL || "https://trishul-ecohomestay.vercel.app"}/login?error=google-login-failed`
       );
     }
   }

@@ -10,7 +10,7 @@ import {
   Modal,
 } from "../components/ui";
 
-const API = import.meta.env.VITE_API_URL || "const API = import.meta.env.VITE_API_URL;";
+const API = import.meta.env.VITE_API_URL;
 
 function Booking() {
   const { id } = useParams();

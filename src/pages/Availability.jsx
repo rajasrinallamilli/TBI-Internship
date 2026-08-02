@@ -5,7 +5,7 @@ import axios from "axios";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
-const API = import.meta.env.VITE_API_URL || "const API = import.meta.env.VITE_API_URL;";
+const API = import.meta.env.VITE_API_URL;
 
 function Availability() {
   const [homestays, setHomestays] = useState([]);

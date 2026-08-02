@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+const API = import.meta.env.VITE_API_URL;
+
 function Profile() {
   const navigate = useNavigate();
 
@@ -23,7 +25,7 @@ function Profile() {
 
         // Send token to protected backend API
         const response = await fetch(
-          "const API = import.meta.env.VITE_API_URL;/api/auth/profile",
+          `${API}/api/auth/profile`,
           {
             method: "GET",
 
