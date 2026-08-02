@@ -4,27 +4,28 @@ import Card from "../components/Card";
 import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
 import axios from "axios";
+
+const API = import.meta.env.VITE_API_URL;
+
 function Home() {
   const [homestays, setHomestays] = useState([]);
 
-useEffect(() => {
-  axios
-    .get("const API = import.meta.env.VITE_API_URL;/api/homestays")
-    .then((response) => {
-      setHomestays(response.data);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-}, []);
-console.log(homestays);
-  
+  useEffect(() => {
+    axios
+      .get(`${API}/api/homestays`)
+      .then((response) => {
+        setHomestays(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
+  console.log(homestays);
+
   return (
     <>
-      
-     
       <Navbar />
-
       <Hero />
 
       <section className="py-12 px-6 bg-slate-50 dark:bg-black">
@@ -32,7 +33,7 @@ console.log(homestays);
           About Our Homestay
         </h2>
 
-       <p className="max-w-4xl mx-auto text-center text-gray-600 dark:text-gray-300">
+        <p className="max-w-4xl mx-auto text-center text-gray-600 dark:text-gray-300">
           Nestled in nature, Trishul Eco Homestays offers a peaceful getaway
           with breathtaking mountain views, eco-friendly accommodations, and
           authentic local experiences.
@@ -40,23 +41,23 @@ console.log(homestays);
       </section>
 
       <section className="py-12 px-6 bg-gradient-to-b from-white to-emerald-50 dark:from-gray-900 dark:to-black">
-       <h2 className="text-4xl font-bold text-center text-emerald-700 dark:text-yellow-300 mb-10">
+        <h2 className="text-4xl font-bold text-center text-emerald-700 dark:text-yellow-300 mb-10">
           Available Room Types
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-  {homestays.map((home) => (
- <Card
-  key={home._id}
-  id={home._id}
-  title={home.title}
-  description={home.description}
-  image={home.image}
-  location={home.location}
-  price={home.price}
-/>
-  ))}
-</div>
+          {homestays.map((home) => (
+            <Card
+              key={home._id}
+              id={home._id}
+              title={home.title}
+              description={home.description}
+              image={home.image}
+              location={home.location}
+              price={home.price}
+            />
+          ))}
+        </div>
       </section>
 
       <Footer />
